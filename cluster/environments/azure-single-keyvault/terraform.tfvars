@@ -5,10 +5,8 @@
 keyvault_name = "my-keyvault"
 keyvault_resource_group = "my-global-rg"
 
-address_space = "<cidr for cluster address space>"
-subnet_prefixes = "10.39.0.0/16"
-vnet_name = "my-vnet"
-vnet_subnet_id = "/subscriptions/<subid>/resourceGroups/<my-global-rg>/providers/Microsoft.Network/virtualNetworks/<my-vnet>/subnets/<my-subnet>"
+subnet_name = "<subnet name>"
+vnet_name = "<vnet name>"
 
 #--------------------------------------------------------------
 # Cluster variables
@@ -20,17 +18,14 @@ cluster_name = "azure-single-keyvault"
 dns_prefix = "azure-single-keyvault"
 
 gitops_ssh_url = "git@github.com:Microsoft/fabrikate-production-cluster-demo-materialized"
-gitops_ssh_key = "./gitops_repo_key"
+gitops_ssh_key_path = "/full/path/to/gitops_repo_private_key"
 
 resource_group_name = "azure-single-keyvault-rg"
-resource_group_location = "westus2"
 
 ssh_public_key = "<ssh public key>"
 
 service_principal_id = "<service principal id>"
 service_principal_secret = "<service principal secret>"
-subscription_id = "<subscription id>"
-tenant_id = "<tenant id>"
 
 #--------------------------------------------------------------
 # Optional variables - Uncomment to use
@@ -38,3 +33,6 @@ tenant_id = "<tenant id>"
 # gitops_url_branch = "release-123"
 # gitops_poll_interval = "30s"
 # gitops_path = "prod"
+# oms_agent_enabled = "false"
+# enable_acr = "true"
+# acr_name = <name of container registry>

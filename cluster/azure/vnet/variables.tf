@@ -8,10 +8,6 @@ variable "resource_group_name" {
   default     = "myapp-rg"
 }
 
-variable "resource_group_location" {
-  description = "Default resource group location that the resource group will be created in. The full list of Azure regions can be found at https://azure.microsoft.com/regions"
-}
-
 variable "address_space" {
   description = "The address space that is used by the virtual network."
   default     = "10.10.0.0/16"
@@ -30,18 +26,19 @@ variable "subnet_prefixes" {
 
 variable "subnet_names" {
   description = "A list of public subnets inside the vNet."
+  type        = list
   default     = ["subnet1", "subnet2"]
 }
 
 variable "subnet_service_endpoints" {
   description = "A list of the service endpoints for the subnet (e.g. Microsoft.Web)"
-  type        = "list"
-  default     = ["", ""]
+  type        = list
+  default     = [[], []]
 }
 
 variable "tags" {
   description = "The tags to associate with your network and subnets."
-  type        = "map"
+  type        = map
 
   default = {
     tag1 = ""

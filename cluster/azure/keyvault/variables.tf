@@ -13,7 +13,8 @@ variable "resource_group_name" {
   default     = "myapp-rg"
 }
 
-variable "location" {
-  description = "The location/region where the core network will be created. The full list of Azure regions can be found at https://azure.microsoft.com/regions"
-  type        = "string"
+variable "tags" {
+  description = "The tags to associate with the keyvault"
+  type        = map
+  default = {}
 }

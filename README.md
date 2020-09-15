@@ -1,36 +1,63 @@
 # Bedrock
 
 [![Build Status](https://dev.azure.com/epicstuff/bedrock/_apis/build/status/Microsoft.bedrock?branchName=master)](https://dev.azure.com/epicstuff/bedrock/_build/latest?definitionId=54&branchName=master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/microsoft/bedrock)](https://goreportcard.com/report/github.com/microsoft/bedrock)
 
-This project is our humble attempt to combine the collective wisdom of the cloud native community for building best practice cloud native Kubernetes clusters, based on real world experiences deploying and operating applications and Kubernetes clusters.
+Bedrock provides patterns, implementation, and automation for operating production Kubernetes clusters based on a GitOps workflow, building on the best practices we have discovered in working with dozens of deployments with customers in operationalizing Kubernetes clusters.
 
-Bedrock is a set of automation, tooling, and infrastructure for deploying production-level Kubernetes clusters with a secure and auditable [GitOps](https://www.weave.works/blog/gitops-operations-by-pull-request) workflow.  
+Bedrock helps you:
+* Define and maintain infrastructure deployments across multiple clusters.
+* Deploy and automate a secure end to end GitOps workflow.
+* Deploy and manage service workloads from source code to their deployment in-cluster.
+* Observe ongoing deployments across multiple services and their revisions and multiple clusters deploying those services.
 
-In our implementation of this methodology, you build a [Fabrikate](https://github.com/Microsoft/fabrikate) high level deployment definition of what should be deployed in your cluster. We believe that defining your deployment at this higher level of abstraction is less error prone than directly editing resource manifest files or cobbling together shell scripts to build resource manifests from Helm templates, and allows you to leverage common pieces across many deployments and to share structure amongst different clusters differentiated by config.
-
-A CI/CD pipeline then generates Kubernetes resource manifests from these Fabrikate high level definitions. On each commit to the high level definition repo, this CI/CD pipeline uses Fabrikate to generate resource manifests from this definition and checks them into a resource manifest git repo. This resource manifest repo both specifies exactly what should be deployed and also maintains an audit trail of all of the low level operational changes. This combination of high level definition and resource manifest repos allow you to secure, control, code review, and audit what is currently deployed at both a high and low level.
-
-Bedrock also provides automation for deploying Kubernetes clusters with Terraform, including deployment and setup of [Flux](https://github.com/weaveworks/flux), which automates the application of the resource manifests specified.
+## Quick Start
+* [Build a GitOps Pipeline with Bedrock in 5 minutes](./docs/gitops-quickstart.md)
 
 ## Getting Started
+* [Installing Prerequisites](./tools/prereqs/README.md)
+* [Walkthrough: Deploying a First Workload](./docs/firstWorkload)
+* [Deep Dive: Why GitOps?](./docs/why-gitops.md)
 
-A Bedrock deployment follows three general steps at a high level:
+## Infrastructure Management
+* [Walkthrough: Single Cluster Infrastructure Deployment](./docs/single-cluster.md)
+* [Deep Dive: Multicluster and "Day 2" Infrastructure Scenarios](./docs/multicluster.md)
+* [CLI Reference](https://github.com/microsoft/bedrock-cli/blob/master/guides/cloud-infra-management.md)
+* [Managed Identity Reference](./docs/managed-identity.md)
 
-1. Define a [Fabrikate](https://github.com/Microsoft/fabrikate) definition for your deployment.
-2. [Deploy a CI/CD pipeline](./gitops) to build resource manifests from this deployment definition.
-3. [Create and deploy](./cluster) a Kubernetes environment with Flux.
+## GitOps Pipeline
+* [Walkthrough: GitOps Pipeline](./docs/hld-to-manifest.md)
+* [Deep Dive: The End to End Deployment Pipeline](./docs/gitops-pipeline.md)
 
-Our cluster creation templates include deployments of a [cloud-native stack](https://github.com/timfpark/fabrikate-cloud-native) by default.  This is intended to be replaced with your own resource manifest repo, but you can also take advantage of this by jumping directly to step #3 if you'd like to give Bedrock a try before defining your own deployment.
+## Service Management
+* [Walkthrough: Service Management](./docs/services.md)
+* [Deep Dive: Helm Charts](https://github.com/microsoft/bedrock-cli/blob/master/guides/building-helm-charts-for-bedrock.md)
+* [Configuring A Service through Fabrikate configurations](./docs/service-configuration.md)
+* [CLI Reference](https://github.com/microsoft/bedrock-cli/blob/master/guides/service-management.md)
+* [Managed Identity Reference](./docs/managed-identity.md)
 
-The easiest way to try Bedrock is to start with our [azure-simple](https://github.com/Microsoft/bedrock/tree/master/cluster/environments/azure-simple) deployment template or with [minikube](https://github.com/Microsoft/bedrock/tree/master/cluster/environments/minikube) to try it locally.   
+## Rings Management
+* [Walkthrough: Rings](./docs/rings.md)
+* [Deep Dive: Manual Rings Management](https://github.com/microsoft/bedrock-cli/blob/master/guides/manual-guide-to-rings.md)
+* [CLI Reference](https://github.com/microsoft/bedrock-cli/blob/master/guides/rings-101.md)
+
+## Deployment Observability
+* [Walkthrough: Observing Service Deployments](./docs/introspection.md)
+* [CLI Reference](https://github.com/microsoft/bedrock-cli/blob/master/guides/service-introspection.md)
 
 ## Community
 
-[Please join us on Slack](https://join.slack.com/t/bedrockco/shared_invite/enQtNjIwNzg3NTU0MDgzLTdiZGY4ZTM5OTM4MWEyM2FlZDA5MmE0MmNhNTQ2MGMxYTY2NGYxMTVlZWFmODVmODJlOWU0Y2U2YmM1YTE0NGI) for discussion and/or questions.
+[Please join us on Slack](https://join.slack.com/t/bedrockco/shared_invite/enQtNjIwNzg3NTU0MDgzLWRiYzQxM2ZmZjQ2NGE2YjA2YTJmMjg3ZmJmOTQwOWY0MTU3NDVkNDJkZDUyMDExZjIxNTg5NWY3MTI3MzFiN2U) for discussion and/or questions.
 
 ## Contributing
 
-We do not claim to have all the answers and would greatly appreciate your ideas and pull requests.
+We do not claim to have all the answers and would greatly appreciate your ideas, issues, and pull requests. 
+
+If you'd like to contribute, start by searching through the [issues](https://github.com/microsoft/bedrock/issues) and [pull requests](https://github.com/microsoft/bedrock/pulls) to see whether someone else has raised a similar idea or question.
+
+If you don't see your idea listed, and you think it fits into the goals of this project, do one of the following:
+* **If your contribution is minor,** such as a typo or grammar fix, open a pull request.
+* **If your contribution is major,** such as a new guide or feature we suggest starting by opening an issue first. That way, there is more visiblity to other contributors.
 
 This project welcomes contributions and suggestions. Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us

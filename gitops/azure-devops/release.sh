@@ -1,4 +1,6 @@
-# Source build.sh
+#!/usr/bin/env bash
+
+# shellcheck disable=SC1091
 . build.sh --source-only
 
 # Initialization
@@ -14,12 +16,16 @@ download_fab
 # Clone HLD repo
 git_connect
 
-echo "FAB SET"
-if [[ ! -z $FAB_ENV_NAME ]]
+if [[ -n $FAB_ENV_NAME ]]
 then
-    fab set --environment $FAB_ENV_NAME --subcomponent $SUBCOMPONENT $YAML_PATH=$YAML_PATH_VALUE
+    echo "fab set --environment "$FAB_ENV_NAME" --subcomponent "$SUBCOMPONENT" "$YAML_PATH=$YAML_PATH_VALUE""
+    fab set --environment "$FAB_ENV_NAME" --subcomponent "$SUBCOMPONENT" "$YAML_PATH=$YAML_PATH_VALUE"
 else
-    fab set --subcomponent $SUBCOMPONENT $YAML_PATH=$YAML_PATH_VALUE
+    echo "fab set --subcomponent "$SUBCOMPONENT" "$YAML_PATH=$YAML_PATH_VALUE""
+    fab set --subcomponent "$SUBCOMPONENT" "$YAML_PATH=$YAML_PATH_VALUE"
+fi
+if [ $? -ne 0 ]; then
+    exit 1;
 fi
 
 echo "GIT STATUS"

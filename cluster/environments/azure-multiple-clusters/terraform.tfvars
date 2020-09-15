@@ -25,7 +25,7 @@ ssh_public_key = ""
 #--------------------------------------------------------------
 gitops_ssh_url = "git@github.com:sarath-p/vote-flux.git"
 
-gitops_ssh_key = ""
+gitops_ssh_key_path = ""
 
 #--------------------------------------------------------------
 # Traffic Manager
@@ -36,14 +36,11 @@ traffic_manager_dns_name = ""
 
 traffic_manager_resource_group_name = ""
 
-traffic_manager_resource_group_location = ""
 
 #--------------------------------------------------------------
 # West
 #--------------------------------------------------------------
 west_resource_group_name = ""
-
-west_resource_group_location = ""
 
 gitops_west_path = ""
 
@@ -52,16 +49,12 @@ gitops_west_path = ""
 #--------------------------------------------------------------
 east_resource_group_name = ""
 
-east_resource_group_location = ""
-
 gitops_east_path = ""
 
 #--------------------------------------------------------------
 # Central
 #--------------------------------------------------------------
 central_resource_group_name = ""
-
-central_resource_group_location = ""
 
 gitops_central_path = ""
 
@@ -72,3 +65,4 @@ gitops_central_path = ""
 # gitops_east_url_branch = "master"
 # gitops_west_url_branch = "master"
 # gitops_poll_interval = "30s"
+# oms_agent_enabled = "false"
